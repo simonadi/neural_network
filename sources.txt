@@ -1,0 +1,4 @@
+ https://towardsdatascience.com/backpropagation-in-a-convolutional-layer-24c8d64d8509
+ https://datascience.stackexchange.com/questions/11699/backprop-through-max-pooling-layers
+ https://gdcoder.com/what-is-an-n-gram-multichannel-convolutional-neural-network-for-text-classification/
+ https://towardsdatascience.com/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a
