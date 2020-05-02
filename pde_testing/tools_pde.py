@@ -56,7 +56,6 @@ def get_data(cfact=[1], T=[1], u0_param=[1]):
 
     for u0_par in u0_param:
         clear_output()
-        print('{}/{}'.format(n, len(u0_param)))
 
         u_0 = lambda x : np.exp(-100*u0_par*(x-0.5)**2)
         v_0 = lambda x : 0

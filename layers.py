@@ -87,20 +87,21 @@ class Dense:
             output[counter, :] += self.bias
         return output, self.activation.compute(output)
 
-    def get_input_error(self, output_error):
+    def get_input_error(self, output_error): # TO OPTIMIZE
         output_error = output_error.reshape(output_error.shape[0], self.output_size)
         error = np.zeros(shape=(output_error.shape[0], self.input_size, 1))
         for index_sample in range(output_error.shape[0]):
-            for index_input in range(self.input_size):
-                error[index_sample, index_input] = sum([self.weights[index_output, index_input]*output_error[index_sample, index_output] for index_output in range(self.output_size)])
+            output_error_mat = output_error[index_sample, :][:, np.newaxis]
+            weights_mat = self.weights.T
+            error[index_sample, :] = weights_mat @ output_error_mat
         return error
 
-    def get_weights_error(self, output_error, input):
+    def get_weights_error(self, output_error, input): # TO OPTIMIZE
         error = np.zeros(shape=tuple([input.shape[0]]) + self.weights.shape)
-        for index_output in range(self.output_size):
-            for index_input in range(self.input_size):
-                for index_sample in range(input.shape[0]):
-                    error[index_sample, index_output, index_input] = input[index_sample, index_input, 0]*output_error[index_sample, index_output, 0]
+        for index_sample in range(input.shape[0]):
+            input_mat = input[index_sample, :, 0][:, np.newaxis]
+            output_error_mat = output_error[index_sample, :, 0][:, np.newaxis]
+            error[index_sample, :, :] = output_error_mat @ input_mat.T
         return error
 
     def get_bias_error(self, output_error):

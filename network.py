@@ -54,6 +54,7 @@ class Network:
                     l.update(grad_w, grad_b, 0.1)
 
 if __name__ == '__main__':
+    print("Generating the dataset")
     solutions, labels = get_data(np.linspace(1, 5, 100), np.linspace(0.5, 1.5, 10))
     solutions, labels = unison_shuffled_copies(solutions, labels)
 
@@ -65,5 +66,7 @@ if __name__ == '__main__':
               Dense((100, 50)),
               Dense((50, 1), activation=sigmoid)]
 
+    print('Initializing the network')
     network = Network(layers, bce)
-    network.train(solutions, labels, epochs=25, batch_size=50)
+    print('Training the network')
+    network.train(solutions, labels, epochs=1, batch_size=100)
