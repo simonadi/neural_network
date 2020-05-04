@@ -28,9 +28,3 @@ class MaxPooling1D(Layer):
         for index_feature in range(self.input_size[1]):
             error[indexes[index_feature], index_feature] = output_error[index_feature]
         return error
-
-    def get_weights_error(self):
-        return 0.
-
-    def update(self, grad, rate):
-        pass
