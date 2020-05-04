@@ -6,6 +6,8 @@ from functions import BinaryCrossEntropy, Sigmoid
 from multiprocessing import Pool
 from functools import reduce
 
+from time import time
+
 from layers import Dense, Conv1D, MaxPooling1D
 
 def unison_shuffled_copies(a, b):
@@ -54,9 +56,11 @@ class Network:
                     l.update(grad_w, grad_b, 0.1)
 
 if __name__ == '__main__':
+    t_start = time()
     print("Generating the dataset")
     solutions, labels = get_data(np.linspace(1, 5, 100), np.linspace(0.5, 1.5, 10))
     solutions, labels = unison_shuffled_copies(solutions, labels)
+    print(f'Time : {time() - t_start} sec')
 
     sigmoid = Sigmoid()
 
@@ -68,5 +72,7 @@ if __name__ == '__main__':
 
     print('Initializing the network')
     network = Network(layers, bce)
+    t_start = time()
     print('Training the network')
-    network.train(solutions, labels, epochs=1, batch_size=100)
+    network.train(solutions, labels, epochs=25, batch_size=100)
+    print(f'Time : {time() - t_start} sec')
